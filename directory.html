@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Page</title>
+    <link href="/style.css" rel="stylesheet" type="text/css" media="all">
+  </head>
+  <body>
+  <h2>My Scratch Projects</h2>
+<div id="projects"></div>
+
+<script>
+// Define your projects by category
+const projectCategories = {
+  "Games": [
+    {id: "123456789", title: "Fun Game"},
+    {id: "987654321", title: "Adventure Game"}
+  ],
+  "Animations": [
+    {id: "192837465", title: "Cool Animation"},
+    {id: "564738291", title: "Funny Animation"}
+  ],
+  "Music": [
+    {id: "102938475", title: "My Music Project"}
+  ]
+};
+
+const container = document.getElementById("projects");
+
+for (const [category, projects] of Object.entries(projectCategories)) {
+  // Create category heading
+  const catHeading = document.createElement("h3");
+  catHeading.textContent = category;
+  container.appendChild(catHeading);
+
+  // Create a list for the projects in this category
+  const list = document.createElement("ul");
+  container.appendChild(list);
+
+  // Add each project as a list item
+  projects.forEach(p => {
+    const li = document.createElement("li");
+    li.innerHTML = `<a href="https://scratch.mit.edu/projects/${p.id}/" target="_blank">${p.title}</a>`;
+    list.appendChild(li);
+  });
+}
+</script>
+
+  </body>
+</html>

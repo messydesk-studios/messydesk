@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Music - Messydesk-studios</title>
+  <link href="/style.css" rel="stylesheet" type="text/css" media="all">
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+</head>
+
+<body>
+<div id="container">
+
+<div id="nav-placeholder"></div>
+<script>
+$(function(){
+  $("#nav-placeholder").load("navigation.html");
+});
+</script>
+
+<div id="container2">
+<div id="sidebar"></div>
+
+<div id="main">
+<div id="window">
+
+<div id="head">Music</div>
+
+<script>
+$(function(){
+  $("#sidebar").load("navigation2.html");
+});
+</script>
+
+<div id="uh">
+
+<script>
+document.addEventListener("DOMContentLoaded", async () => {
+  const container = document.getElementById("scratch-music-thumbs");
+  if (!container) return;
+
+  const excludeList = [
+    "123456789",
+    "https://www.youtube.com/watch?v=XXXXX",
+    "YYYYYYYYY"
+  ];
+
+  const overrides = {
+    "945442870": {
+      title: "Custom Music Title",
+      author: "Lucas Michael",
+      position: 0
+    },
+    "YYYYYYYYY": {
+      title: "Custom YouTube Song",
+      author: "Messydesk Studios"
+    }
+  };
+
+  try {
+    const res = await fetch("https://messydesk.neocities.org/more");
+    if (!res.ok) throw new Error("Fetch failed");
+
+    const html = await res.text();
+    const doc = new DOMParser().parseFromString(html, "text/html");
+
+    const headers = [...doc.querySelectorAll("h2")];
+    const musicHeader = headers.find(
+      h => h.textContent.trim().toLowerCase() === "music"
+    );
+    if (!musicHeader) return;
+
+    let scratch = [];
+    let youtube = [];
+
+    let node = musicHeader.nextElementSibling;
+    while (node && node.tagName !== "H2") {
+
+      node.querySelectorAll('a[href*="scratch.mit.edu/projects/"]').forEach(a => {
+        const id = a.href.match(/projects\/(\d+)/)?.[1];
+        if (!id || excludeList.includes(id)) return;
+
+        const o = overrides[id];
+        scratch.push({
+          url: a.href,
+          title: o?.title || a.textContent.trim(),
+          thumb: o?.thumb || `https://uploads.scratch.mit.edu/projects/thumbnails/${id}.png`,
+          author: o?.author || "Lucas Michael",
+          position: o?.position
+        });
+      });
+
+      node.querySelectorAll('a[href*="youtube.com/watch"]').forEach(a => {
+        const id = a.href.match(/[?&]v=([^&]+)/)?.[1];
+        if (!id || excludeList.includes(id) || excludeList.includes(a.href)) return;
+
+        const o = overrides[id] || overrides[a.href];
+        youtube.push({
+          url: a.href,
+          title: o?.title || a.textContent.trim(),
+          thumb: o?.thumb || `https://img.youtube.com/vi/${id}/hqdefault.jpg`,
+          author: o?.author || "Lucas Michael",
+          position: o?.position
+        });
+      });
+
+      node = node.nextElementSibling;
+    }
+
+    scratch.reverse();
+    youtube.reverse();
+
+    [...scratch, ...youtube].forEach(item => {
+      let title = item.title.length > 30
+        ? item.title.slice(0, 27) + "…"
+        : item.title;
+
+      const card = document.createElement("div");
+      card.className = "video-card";
+      card.innerHTML = `
+        <a href="${item.url}" target="_blank">
+          <img src="${item.thumb}" alt="${title}">
+          <p>${title}</p>
+        </a>
+        <p class="author">${item.author}</p>
+      `;
+
+      if (typeof item.position === "number" &&
+          item.position < container.children.length) {
+        container.insertBefore(card, container.children[item.position]);
+      } else {
+        container.appendChild(card);
+      }
+    });
+
+  } catch (e) {
+    console.error("Music fetch failed:", e);
+  }
+});
+</script>
+
+<div id="music">
+  <div id="scratch-music-thumbs"></div>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<style>
+#main { width: 90%; }
+
+#uh {
+  overflow: auto;
+  height: 600px;
+}
+
+#two a, #one a, #four a, #five a, #six a{
+ color: black;
+ background: #e5e5e5;
+ background: linear-gradient(180deg, rgb(260, 260, 260) 0%, rgb(226, 226, 226) 12%, rgba(226, 226, 226, 1) 100%);
+ border-top: 1px solid black;
+}
+a{
+ color: #003399; 
+}
+#three a{
+ /*background: linear-gradient(180deg,rgba(110, 110, 110, 1) 0%, rgba(54, 53, 53, 1) 100%);*/
+ background: linear-gradient(180deg, rgb(40, 40, 40) 0%, rgb(100, 100, 100) 12%, rgba(100, 100, 100, 1) 100%);
+ color: white;
+}
+#music {
+  margin: 20px 5% 20px 5%;
+}
+
+#scratch-music-thumbs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+#scratch-music-thumbs {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 12px;
+}
+
+
+/* EXACT SAME CARD STYLE AS VIDEOS */
+.video-card {
+  width: 100%;
+  max-width: 160px;
+  padding: 10px;
+  background: #f0ecec;
+  border: 1px solid #1d1d1d;
+}
+
+.video-card img {
+  width: 100%;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.video-card p {
+  font-size: 14px;
+  margin: 3px 0 0;
+  color: black;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 140px;
+}
+
+.video-card a,
+.video-card a:visited,
+.video-card a:active {
+  color: black;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.video-card a:hover {
+  text-decoration: underline;
+}
+
+.author {
+  margin: 0;
+  font-size: 12px;
+}
+</style>
+
+</body>
+</html>

@@ -1,0 +1,21 @@
+#sidebar{
+ font-family: arial;
+ padding: 0px;
+ width: 30%;
+ margin: 0;
+ border: 1px solid black;
+}
+#menu{
+ border-bottom: 1px solid black;
+}
+#menu a{
+ display: block;
+ font-weight: bold;
+ text-decoration: none;
+ font-size: 20px;
+ padding: 8px;
+}
+.view{
+ margin: 10px; 
+ display: block;
+}

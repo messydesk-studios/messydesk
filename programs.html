@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programs - Messydesk-studios</title>
+    <link href="/style.css" rel="stylesheet" type="text/css" media="all">
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+  </head>
+
+<body>
+<div id="container"><!--Container -->
+<div id="nav-placeholder">
+
+</div>
+
+<script>
+$(function(){
+  $("#nav-placeholder").load("navigation.html");
+});
+</script>
+<div id="container2">
+<div id="sidebar">
+</div>
+<div id="main">
+<div id="window">
+<div id="head">
+Programs
+</div>
+<script>
+$(function(){
+  $("#sidebar").load("navigation2.html");
+});
+</script>
+<div id="uh">
+
+<script>
+document.addEventListener("DOMContentLoaded", async () => {
+  const container = document.getElementById("scratch-game-thumbs");
+  if (!container) return;
+
+  /* =========================
+     CONFIG
+  ========================= */
+
+  const REVERSE_APPS = true;
+  const REVERSE_GOOGLE_SLIDES = true;
+  const REVERSE_SCRATCH = true;
+
+  // Blacklist (IDs or full URLs)
+  const excludeList = [
+    "1073722324",
+    "https://docs.google.com/presentation/d/EXAMPLE"
+  ];
+
+  // Overrides + positions
+  const overrides = {
+    "https://drive.google.com/file/d/16bUBC2Nb_Jfmzuj79r7HCYbiwXBSq87q/view?usp=sharing": {
+      thumb: "https://messydesk.neocities.org/images/hc.png",
+    },
+    "https://docs.google.com/presentation/d/1c1icXhNu_FdyBqL-Hc9mdD4VgKZ_DMrPv2Cj3y2juh0/present?slide=id.g2b739986d96_3_20": {
+      thumb: "https://messydesk.neocities.org/images/axon.png",
+    },
+    "123456789": {
+      thumb: "/images/custom-scratch.png",
+      title: "Custom Scratch Tool",
+      position: 2
+    }
+  };
+
+  try {
+    const res = await fetch("https://messydesk.neocities.org/more");
+    if (!res.ok) throw new Error("Fetch failed");
+    const html = await res.text();
+
+    const doc = new DOMParser().parseFromString(html, "text/html");
+    const headers = [...doc.querySelectorAll("h2")];
+
+    const programsHeader = headers.find(
+      h => h.textContent.trim() === "Programs"
+    );
+    if (!programsHeader) return;
+
+    let apps = [];
+    let googleSlides = [];
+    let scratchProjects = [];
+
+    let node = programsHeader.nextElementSibling;
+    while (node && node.tagName !== "H2") {
+
+      /* ---------- APPS ---------- */
+      node.querySelectorAll('a[href]').forEach(a => {
+        const url = a.href;
+        if (excludeList.includes(url)) return;
+
+        // Treat non-Scratch & non-Google links as apps
+        if (
+          !url.includes("scratch.mit.edu/projects/") &&
+          !url.includes("docs.google.com/presentation")
+        ) {
+          apps.push({
+            url,
+            title: overrides[url]?.title || a.textContent.trim(),
+            thumb: overrides[url]?.thumb || "/images/app.png",
+            author: "Lucas Michael",
+            position: overrides[url]?.position
+          });
+        }
+      });
+
+      /* ---------- GOOGLE SLIDES ---------- */
+      node.querySelectorAll('a[href*="docs.google.com/presentation"]').forEach(a => {
+        if (excludeList.includes(a.href)) return;
+
+        googleSlides.push({
+          url: a.href,
+          title: overrides[a.href]?.title || a.textContent.trim(),
+          thumb: overrides[a.href]?.thumb || "/images/google-slides.png",
+          author: "Lucas Michael",
+          position: overrides[a.href]?.position
+        });
+      });
+
+      /* ---------- SCRATCH ---------- */
+      node.querySelectorAll('a[href*="scratch.mit.edu/projects/"]').forEach(a => {
+        const idMatch = a.href.match(/projects\/(\d+)/);
+        if (!idMatch) return;
+
+        const id = idMatch[1];
+        if (excludeList.includes(id)) return;
+
+        scratchProjects.push({
+          url: a.href,
+          title: overrides[id]?.title || a.textContent.trim(),
+          thumb:
+            overrides[id]?.thumb ||
+            `https://uploads.scratch.mit.edu/projects/thumbnails/${id}.png`,
+          author: "Lucas Michael",
+          position: overrides[id]?.position
+        });
+      });
+
+      node = node.nextElementSibling;
+    }
+
+    /* =========================
+       ORDERING
+    ========================= */
+
+    if (REVERSE_APPS) apps.reverse();
+    if (REVERSE_GOOGLE_SLIDES) googleSlides.reverse();
+    if (REVERSE_SCRATCH) scratchProjects.reverse();
+
+    const allPrograms = [
+      ...apps,
+      ...googleSlides,
+      ...scratchProjects
+    ];
+
+    /* =========================
+       RENDER
+    ========================= */
+
+    allPrograms.forEach(item => {
+      let title = item.title;
+      if (title.length > 25) title = title.slice(0, 22) + "...";
+
+      const card = document.createElement("div");
+      card.className = "game-card";
+      card.innerHTML = `
+        <a href="${item.url}" target="_blank">
+          <img src="${item.thumb}" alt="${title}">
+          <p>${title}</p>
+        </a>
+        <p class="author">${item.author}</p>
+      `;
+
+      if (
+        typeof item.position === "number" &&
+        item.position < container.children.length
+      ) {
+        container.insertBefore(card, container.children[item.position]);
+      } else {
+        container.appendChild(card);
+      }
+    });
+
+  } catch (err) {
+    console.error("Programs fetch failed:", err);
+  }
+});
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="games">
+<div id="scratch-game-thumbs"></div>
+</div>
+</div>
+
+
+
+
+
+
+</div>
+
+</div><!-- main -->
+</div> <!-- conatiner2 --> 
+</div> <!-- conatiner --> 
+<style>
+#main{
+ width: 90%;
+}
+#uh{
+  overflow: auto;
+  height: 620px;
+}
+#one a, #three a, #four a, #five a, #two a{
+ color: black;
+ background: #e5e5e5;
+ /*background: linear-gradient(180deg, rgb(240, 240, 240) 0%, rgb(206, 206, 206) 12%, rgba(206, 206, 206, 1) 100%);*/
+ background: linear-gradient(180deg, rgb(260, 260, 260) 0%, rgb(226, 226, 226) 12%, rgba(226, 226, 226, 1) 100%);
+ border-top: 1px solid black;
+}
+a{
+ color: #003399; 
+}
+#six a{
+ /*background: linear-gradient(180deg,rgba(110, 110, 110, 1) 0%, rgba(54, 53, 53, 1) 100%);*/
+ background: linear-gradient(180deg, rgb(40, 40, 40) 0%, rgb(100, 100, 100) 12%, rgba(100, 100, 100, 1) 100%);
+ color: white;
+}
+
+
+
+
+#games{
+  display: flex;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+#scratch-game-thumbs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+
+
+.game-card {
+  width: 160px;
+  padding: 10px;
+  background: #f0ecec;
+  border: 1px solid #1d1d1d;
+  margin: 0px;
+}
+
+.game-card img {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  margin-bottom: 10px;
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+}
+
+.game-card p{
+  font-size: 14px; 
+  padding: 0px; 
+  margin-top: 3px;
+  margin-bottom: 0;
+  color: black;
+  
+  white-space: nowrap;       /* Keep it on one line */
+  overflow: hidden;          /* Hide overflowing text */
+  text-overflow: ellipsis;   /* Show "..." */
+  max-width: 140px; 
+}
+.game-card a,
+.game-card a:visited,
+.game-card a:active {
+  color: black;
+  text-decoration: none;
+  font-weight: bold;
+}
+.game-card a:hover{
+ text-decoration: underline; 
+ text-decoration-color: black;
+}
+.author{
+    margin: 0;
+    font-size: 12px;
+}
+</style>
+</body>
+</html>
