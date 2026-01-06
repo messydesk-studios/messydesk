@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   const overrides = {
     "https://rosc.neocities.org": {
-      thumb: "https://messydesk.neocities.org/images/rosc.png",
+      thumb: "images/rosc.png",
       desc: "The Republic of Sus Cringers is a website that is based on the group located in ISM and includes a collection of games and animations made by Sus Cringers members. The site also has a news page a chat room which helps keep people who left ISM in touch and a Meme of the Week.",
       position: 0
     },
@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       position: 2
     },
     "https://aboomistudio.neocities.org": {
-      thumb: "https://messydesk.neocities.org/images/moop.png",
+      thumb: "images/moop.png",
       desc: "Aboomistudio was a combination of Messydesk-studios and Aboomination. The combined media group was known for making animations and games on scratch such as the Animator Battles. The group was mainly known for their website on google sites. Later on, the group transitioned to an html webpage but was immediately cancelled after a breakup of the organisation.",
       position: 3
     },
@@ -69,18 +69,18 @@ document.addEventListener("DOMContentLoaded", async () => {
       position: 4
     },
     "https://michaelr67.wixsite.com/platsville": {
-      thumb: "https://messydesk.neocities.org/images/platsville.png",
+      thumb: "images/platsville.png",
       desc: "Platsville was a social media platform commonly used by classmates. The name Platsville is short for Platscape village and consisted of groups, posts and a chat room. The site currently has 23 members although it hasn't been used by anyone for months.",
       position: 1
     },
     "https://sites.google.com/ismanila.org/nerdcenter/home": {
-      thumb: "https://messydesk.neocities.org/images/nerdcenter.png",
+      thumb: "images/nerdcenter.png",
       desc: "Nerd Center is a Directory of Websites made in Google slides also known as Slide-sites. The website is heavily inspired by the chaotic, colorful and gif heavey web 1.0 sites of the 90s.",
     }
   };
 
   try {
-    const response = await fetch("https://messydesk.neocities.org/more");
+    const response = await fetch("more");
     if (!response.ok) throw new Error("Failed to fetch directory");
     const html = await response.text();
 
