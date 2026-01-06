@@ -56,10 +56,10 @@ document.addEventListener("DOMContentLoaded", async () => {
   // Overrides + positions
   const overrides = {
     "https://drive.google.com/file/d/16bUBC2Nb_Jfmzuj79r7HCYbiwXBSq87q/view?usp=sharing": {
-      thumb: "https://messydesk.neocities.org/images/hc.png",
+      thumb: "images/hc.png",
     },
     "https://docs.google.com/presentation/d/1c1icXhNu_FdyBqL-Hc9mdD4VgKZ_DMrPv2Cj3y2juh0/present?slide=id.g2b739986d96_3_20": {
-      thumb: "https://messydesk.neocities.org/images/axon.png",
+      thumb: "images/axon.png",
     },
     "123456789": {
       thumb: "/images/custom-scratch.png",
@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   };
 
   try {
-    const res = await fetch("https://messydesk.neocities.org/more");
+    const res = await fetch("more");
     if (!res.ok) throw new Error("Fetch failed");
     const html = await res.text();
 
