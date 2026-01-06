@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   };
 
   try {
-    const res = await fetch("https://messydesk.neocities.org/more");
+    const res = await fetch("more");
     if (!res.ok) throw new Error("Fetch failed");
 
     const html = await res.text();
