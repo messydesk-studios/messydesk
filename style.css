@@ -1,103 +1,261 @@
-body{
-  background-image: url('https://static.wixstatic.com/media/b8da42_a7f513d273d848c38e07d201c95361b0~mv2.jpg/v1/fill/w_533,h_533,al_c,lg_1,q_80,enc_auto/Screen%20Shot%202024-01-28%20at%202_25_edited_jp.jpg');
+:root {
+  --notification-sfx: ;
 }
-#header{
-  background-image: url('messydeskbanner3.0.png');
-  background-size: 100%;
-  height: 124px;
-  width: 100%;
+body p{
+  color: black;
 }
-#container{
-  width: 850px;
-  height: 100px;
+.msgWrapper {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+.allMessages {
+ border-radius: 10px;
+ font-family: Arial, sans-serif;
+ font-size: 10pt;
+ width: calc(95% - 80px);
+ padding: 10px;
+ position: relative;
+ border: solid 1px #aaaaaa;
+}
+.msgWrapper + .msgWrapper {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.allMessages:before {
+  content: attr(time);
+  position: static;
+  float: right;
+}
+.allMessages.containsOnlyEmojis .emoji {
+    height: 50px;
+}
+.allMessages.pm {
+  padding-top: 26px;
+}
+.allMessages.pm:before {
+  content: "[Private Message]";
+  display: flex;
   align-items: center;
-  margin: auto;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  justify-content: flex-end;
+  height: 16px;
+  padding: 5px;
+  width: calc(100% - 10px);
+  position: absolute;
+  right: 0;
+  top: 0;
+  font-size: 8pt;
+  font-weight: bold;
+  color: #F33;
 }
-#navbar{
- color: white;
- width: 100%;
- height: 35px;
- background-image: url('nav.png');
- background-size: 100px;
- display: flex;
- font-size: 20px;
+.sent {
+ border-radius: 5px 5px 5px 0;
+ background-color: white;
+ color: #111;
+}
+.sent:after {
+ content: " ";
+ background-color: inherit;
+ height: 10px;
+ width: 10px;
+ position: absolute;
+ left: -6px;
+ bottom: 6px;
+ transform: rotateZ(45deg);
+ border-radius: 0 0 0 2px;
+ border-left: solid 1px #aaaaaa;
+ border-bottom: solid 1px #aaaaaa;
+}
+.msgWrapper:has(.sent){
+  flex-direction: none;
+}
+.msgWrapper:has(.sent, .recieved):before {
+  content: " ";
+  width: 50px;
+  height: 50px;
+  background-color: #FFF;
+  background-image: url(/media/user2.jpg);
+  background-size: 100% auto;
+  display: inline-block;
+  float: right;
+  margin: 2px;
+  margin-left: 0;
+  margin-right: 15px;
+  border: 1px solid #aaaaaa;
+}
+.msgWrapper:has(.recieved):before {
+  margin-left: 0;
+  margin-right: 15px;
+}
+.msgWrapper:has(.allMessages[uid="kaW7woNk6lXjj2e8LxWDywo4LAG2"]):before {
+  background-image: url(https://andrew-grider.com/media/me-min.png);
 }
 
-#navbar a {
- display: block; 
- padding: 7px 30px;
- float: center;
- text-align: center;
- color: white;
- font-family: 'arial';
- font-weight: bold;
+.msgWrapper:has(.allMessages[uid="qDQkWftkPIMyUDJppSHQTVJI6ex2"]):before {
+  background-image: url(https://dexaroth.neocities.org/favicon.gif);
 }
-#sidebar{
-  background-color: #cdcdcd;
-  height: 650px;
-  width: 37%;
-  /* 250 */
+.recieved:after {
+ content: " ";
+ background-color: inherit;
+ height: 10px;
+ width: 10px;
+ position: absolute;
+ left: -6px;
+ bottom: 6px;
+ transform: rotateZ(45deg);
+ border-radius: 0 0 0 2px;
+ border-left: solid 1px #aaaaaa;
+ border-bottom: solid 1px #aaaaaa;
 }
-
-#container2{
-  display: flex;
+.recieved {
+ border-radius: 5px 5px 5px 0;
+ background-color: white;
+ color: #000;
 }
-#main{
- width: 100%;
- height: 100%;
- font-family: arial;
- background: white;
+blockquote {
+ background-color: #777;
+ color: #111;
+ border-color: #000;
 }
-#banner{
-  background-size: 590px;
-  background-image: url('banner.png');
-  height: 150px;
+#background {
+ background: #e3e9f4;
+ scrollbar-color: #000 transparent;
+ scrollbar-width: thin;
+}
+#input {
+ color: #111;
+ background: #FFF;
+ border: 1px solid #aaaaaa;
+ outline: none;
+ border-radius: 0px;
+}
+#input:empty::before {
+ content: "Write a message...";
+ color: #777;
+ border-radius: 0px;
+}
+.badge {
+  display: none;
+}
+.senderInfo:has(.mod, .owner, .beta):after {
+ content: " ";
+ height: 10pt;
+ width: 10pt;
+ background: transparent;
+ border-radius: 50%;
+ background-image: url(/media/verified.png);
+ background-size: 100% 100%;
+ margin-left: 5px;
+ filter: contrast(1.5);
+}
+.devTag {
+    display: none;
+}
+.senderInfo * {
+ text-decoration: underline;
+}
+.senderInfo {
+ color: #3A599B;
+}
+#timestamp {
+ display: none;
+}
+#textInput {
+ background-color: #FFF;
+}
+#top_banner {
+  display: none;
+}
+#replyBanner {
+  background-color: #333;
+  font-size: 10pt;
+}
+.ctxMenuOption {
+  background-color: #333 !important;
+  color: #AAA;
+  position: relative;
+}
+.ctxMenuOption:hover:after {
+  content: " ";
+  display: block;
+  height: 100%;
   width: 100%;
-  background-position: center;
+  background-color: rgba(0, 0, 0, 0.25);
+  position: absolute;
+  left: 0;
+  top: 0;
 }
-
-
-#window2{
- height: 180px;
- width: 90%;
- margin: 10px;
- font-family: 'arial';
- text-align: left;
- padding: 0px 0px 0px 0px;
+#ctxMenu {
+  background-color: #555 !important;
 }
-#window2inner{
- height: auto;
- border: 1px solid #5e5e5e;
- font-family: 'arial';
- text-align: left;
- padding: 0px 0px 0px 0px;
- background: white;
+.msgBody a {
+  color: inherit !important;
 }
-#window{
- width: 100%;
+#settings {
+  filter: invert(100%) drop-shadow(0 0 2px #000);
+} 
+#settingsMenu hr {
+  height: 2px;
+  width: 100%;
+  margin: auto;
+  background-color: #AAA;
+  border: none;
 }
-#head{
-  font-weight: bold;
-  background: linear-gradient(180deg, rgba(233,233,233,1) 0%, rgba(183,183,183,1) 12%, rgba(183,183,183,1) 100%);
-  font-size: 17px;
-  height: 23px;
-  padding: 6px 0px 0px 15px;
-  border-radius: 10px 10px 0px 0px;
-  border: 1px solid black;
-  color: #3333333;
-  display: flex;
+#is_typing {
+  display: none !important;
 }
-#head2{
-  font-weight: bold;
-  background: linear-gradient(180deg, rgba(233,233,233,1) 0%, rgba(183,183,183,1) 12%, rgba(183,183,183,1) 100%);
-  font-size: 15px;
-  height: 18px;
-  padding: 4px 0px 1px 15px;
-  border-radius: 10px 10px 0px 0px;
-  border: 1px solid black;
-  color: #3333333;
+#emojiTray {
+  color: #111;
 }
-#container2 a {
-    color: #003399;
+.pinned {
+ position: sticky;
+ top: 0;
+ 
+ z-index: 2;
+ border-radius: 5px;
+ overflow: hidden;
+ cursor: default;
+}
+.pinned:before {
+    all: unset !important;
+}
+.pinned > .allMessages {
+    box-shadow: 0 0 3px #000;
+    width: 100%;
+    transition: opacity 250ms ease;
+}
+.pinned:hover > .allMessages {
+    opacity: 0.25;
+}
+.pinned > .allMessages::after {
+    display: none;
+}
+.pinned:after {
+ display: inline-block;
+ position: absolute;
+ right: 2px;
+ top: 2px;
+ content: "ðŸ“Œ";
+}
+#settingsMenu{
+ background: #b7b7b7 
+}
+button:focus{
+  outline:none;
+}
+#save{
+  /*position:absolute;
+  right:3px;
+  top:3px;*/
+  margin:2px 2px 2px 0;
+  float:right;
+  width:130px;
+  height:30px;
+  background:#C0C0C0;
+  border-width:2px;
+  border-color:#FFFFFF #808080 #808080 #FFFFFF;
+  padding:0;
+  font-size:15px;
+  font-family:Tahoma;
+  text-align:center;
 }

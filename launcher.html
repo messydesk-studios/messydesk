@@ -1,0 +1,18 @@
+<script>
+function openNewBrowserWindow() {
+  const url = 'chat.html';
+  const windowName = 'myNewWindow';
+  const features = 'width=1000,height=600,toolbar=no,location=no,menubar=no,status=no,scrollbars=yes,resizable=yes,top=100,left=100';
+  window.open(url, windowName, features);
+}
+</script>
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Platsville chat</title>
+    </head>
+    <body>
+        Welcome to chat launcher
+        <button onclick=openNewBrowserWindow()>Launch</button>
+    </body>
+</html>

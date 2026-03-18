@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Platsville chat</title>
+        <script>
+                        chattable.initialize({
+                            stylesheet: "/path/to/your/chattable.css"
+                        });
+                    </script>
+        <script src="https://iframe.chat/scripts/main.min.js"></script>
+        <style>
+            body{
+                font-family: tahoma;
+                margin: 0;
+                overflow: hidden;
+            }
+            #container{
+                margin: 0;
+                width: 998px;
+                height: calc(600px - 4px);
+                border: 1px solid #595959;
+            }
+            #header{
+                background: #B7B7B7;
+                background: linear-gradient(90deg, rgba(183, 183, 183, 1) 0%, rgba(217, 217, 217, 1) 37%, rgba(162, 196, 201, 1) 93%, rgba(208, 225, 228, 1) 100%);
+                display: flex;
+                height: 70px;
+                border-bottom: 1px solid #595959;
+            }
+            #logo{
+                display: flex;
+            }
+            .chat{
+                font-family: tahoma;
+                color: #595959;
+                font-size: 55px;
+                margin: 0px;
+                margin-top: auto;
+                margin-bottom: auto;
+            }
+            .platsville{
+                margin-top: auto;
+                margin-bottom: auto;
+            }
+            .icon{
+                margin-top: auto;
+                margin-bottom: auto;
+                margin-left: 10px;
+            }
+            .windowhead{
+                background: #0C5395;        
+                background: linear-gradient(270deg, rgba(12, 83, 149, 1) 0%, rgba(53, 124, 189, 1) 21%, rgba(111, 169, 221, 1) 40%, rgba(160, 197, 232, 1) 71%, rgba(208, 225, 228, 1) 100%);
+                font-size: 20px;
+                padding: 3px;
+                border-bottom: 1px solid #595959;
+            }
+            #container2{
+                display: flex;
+                height: calc(100% - 70px);
+                border-bottom: 1px solid #595959;
+            }
+            #side{
+                background: #D9D9D9;
+                height: 100%;
+                width: 30%;
+                
+            }
+            #main{
+              background: #EFEFEF;
+              height: 100%;  
+              width: 70%;
+              border-right: 1px solid #595959;
+              display: inline-block;
+            }
+            #messagebox{
+              background: #EFEFEF;
+              height: 492px;  
+              width: 100%;
+              border-right: 1px solid #595959;
+              display: inline-block;
+            }
+            #panel{
+                background: #EEEEEE;
+                border: 1px dashed #595959;
+                height: 60%;
+                margin: 10px;
+            }
+            #input{
+                margin-top: auto;
+                padding: 5px;
+                width: 98.6%;
+                background: rgb(217, 217, 217);
+                border-top: 1px solid #595959;
+                border-bottom: 1px solid #595959;
+                border-right: 1px solid #595959;
+                display: flex;
+            }
+            #input input{
+                width: 600px;
+                height: 20px;
+                border: 1px solid rgb(127, 127, 127);
+            }
+            #user{
+                margin: 10px;
+                font-size: 20px;
+                display: flex;
+            }
+            .name{
+                margin-left: 10px;
+                margin-top: 2px;
+                margin-bottom: 2px;
+            }
+
+            button:focus{
+                outline:none;
+            }
+            #headerbutton{
+                /*position:absolute;
+                right:3px;
+                top:3px;*/
+                margin: auto 10px auto auto;
+                float:right;
+            }
+            .button{
+                background:#C0C0C0;
+                border-width:2px;
+                border-color:#FFFFFF #808080 #808080 #FFFFFF;
+                padding: 5px 25px 5px 25px;
+                font-size: 20px;
+                font-family:Tahoma;
+                text-align:center;
+            }
+            #login{
+                display: flex;
+                margin: 30px auto 0px auto;
+                width: 100px;
+            }
+            #message{
+                margin: 10px;
+                display: flex;
+            }
+            .message{
+                margin-left: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="container">
+            <div id="header">
+                <div id="logo">
+                  <img class="icon" src="msn.webp" height="80%"><img class="platsville" height=85% src="platsville-logo.png"><h1 class="chat">Chat</h1>
+                </div>
+                <div id="headerbutton">
+                <button class="button" onclick="about()">About</button>
+                </div>
+            </div>
+            <div id="container2">
+                <div id="main">
+                    
+                    <!--<div id="messagebox">
+
+                        
+                    <div id="message">
+                        <div id="name" style="color: red">&ltLucas&gt</div>
+                        <div class="message">Hello</div>
+                    </div>
+
+                    <div id="message">
+                        <div id="name" style="color: rgb(23, 124, 0)">&ltSteve&gt</div>
+                        <div class="message">Hello</div>
+                    </div>
+
+
+                    </div>-->
+                    
+
+                    <iframe width=100% height=100% src="https://iframe.chat/embed?chat=platsville" id="chattable"></iframe>
+                        <!--<div id="input">
+                         <form class="input">
+                               <label for="message">Message:</label>
+                             <input type="text">
+                        </form>
+                        </div>-->
+                </div>
+                <div id="side">
+                    <div class="windowhead">
+                        <b>Users</b>
+                    </div>
+                    <div id="panel">
+                        <div id="user">
+                            <img height=30 src="https://images.dwncdn.net/images/t_app-icon-l/p/e3bbbe64-9b28-11e6-8be8-00163ec9f5fa/2890085563/2150_4-10033259-logo">
+                            <p class="name">John</p>
+                        </div>
+                        <div id="user">
+                            <img height=30 src="https://images.dwncdn.net/images/t_app-icon-l/p/e3bbbe64-9b28-11e6-8be8-00163ec9f5fa/2890085563/2150_4-10033259-logo">
+                            <p class="name">Tim</p>
+                        </div>
+                        <div id="user">
+                            <img height=30 src="https://images.dwncdn.net/images/t_app-icon-l/p/e3bbbe64-9b28-11e6-8be8-00163ec9f5fa/2890085563/2150_4-10033259-logo">
+                            <p class="name">Jim Bob</p>
+                        </div>
+                        <div id="user">
+                            <img height=30 src="https://images.dwncdn.net/images/t_app-icon-l/p/e3bbbe64-9b28-11e6-8be8-00163ec9f5fa/2890085563/2150_4-10033259-logo">
+                            <p class="name">Bobbothiathan</p>
+                        </div>
+                        <div id="user">
+                            <img height=30 src="https://images.dwncdn.net/images/t_app-icon-l/p/e3bbbe64-9b28-11e6-8be8-00163ec9f5fa/2890085563/2150_4-10033259-logo">
+                            <p class="name">William</p>
+                        </div>
+                    </div>
+                    <div id="login">
+                        <button class="button" onclick="about()">Login</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
