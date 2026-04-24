@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Videos - Messydesk-studios</title>
+    <link href="/style.css" rel="stylesheet" type="text/css" media="all">
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+  </head>
+
+<body>
+<div id="container"><!--Container -->
+<div id="nav-placeholder">
+
+</div>
+
+<script>
+$(function(){
+  $("#nav-placeholder").load("navigation.html");
+});
+</script>
+<div id="container2">
+<div id="sidebar">
+</div>
+<div id="main">
+<div style="display: flex;"></div>
+<b>Video Player</b><a href="videos.html" style="margin-left: auto;">Back</a>
+</div>
+<hr>
+<div id="window">
+<div id="head">
+Homework Musical
+</div>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Fi7VGB5L70k?si=AEw18VFTxkX3rd9c" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<script>
+$(function(){
+  $("#sidebar").load("navigation2.html");
+});
+</script>
+<div id="uh">
+
+
+
+
+
+</div>
+
+</div>
+
+</div><!-- main -->
+</div> <!-- conatiner2 --> 
+</div> <!-- conatiner --> 
+<style>
+#main{
+ width: 90%;
+}
+#uh{
+  overflow: auto;
+  height: 620px;
+}
+#two a, #three a, #four a, #five a, #six a{
+ color: black;
+ background: #e5e5e5;
+ background: linear-gradient(180deg, rgb(260, 260, 260) 0%, rgb(226, 226, 226) 12%, rgba(226, 226, 226, 1) 100%);
+ border-top: 1px solid black;
+}
+a{
+ color: #003399; 
+}
+#one a{
+ /*background: linear-gradient(180deg,rgba(110, 110, 110, 1) 0%, rgba(54, 53, 53, 1) 100%);*/
+ background: linear-gradient(180deg, rgb(40, 40, 40) 0%, rgb(100, 100, 100) 12%, rgba(100, 100, 100, 1) 100%);
+ color: white;
+}
+
+
+
+
+
+#videos{
+  display: flex;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+#scratch-video-thumbs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+
+.video-card {
+  width: 160px;
+  padding: 10px;
+  background: #f0ecec;
+  border: 1px solid #1d1d1d;
+  margin: 0px;
+}
+
+.video-card img {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.video-card p{
+  font-size: 14px; 
+  padding: 0px; 
+  margin-top: 3px;
+  margin-bottom: 0;
+  color: black;
+  
+  white-space: nowrap;       /* Keep it on one line */
+  overflow: hidden;          /* Hide overflowing text */
+  text-overflow: ellipsis;   /* Show "..." */
+  max-width: 140px; 
+}
+.video-card a,
+.video-card a:visited,
+.video-card a:active {
+  color: black;
+  text-decoration: none;
+  font-weight: bold;
+}
+.video-card a:hover{
+ text-decoration: underline; 
+ text-decoration-color: black;
+}
+.author{
+    margin: 0;
+    font-size: 12px;
+}
+
+</style>
+</body>
+</html>
+
